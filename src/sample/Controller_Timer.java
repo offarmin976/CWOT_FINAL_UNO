@@ -34,21 +34,17 @@ import java.util.TimerTask;
 
 public class Controller_Timer implements Initializable {
 
+    // CONTROLLER TIMER- CLOCKWORKS ORANGE TIMER PROTO FINAL UNO 1
+
     private Thread countdownThread;
     private Stage primaryStage;
     Timer timer = new Timer();
-
     private Timeline timeline;
     int Count = 0;
     private AnimationTimer atimer;
-
-
-
     private static final Integer STARTTIME = 15;
 
-
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
-
 
     @FXML
     private AnchorPane apane;
@@ -67,21 +63,18 @@ public class Controller_Timer implements Initializable {
 
     @FXML
     void resumeTime(ActionEvent event) {
-
+        //Not working - fix it with Release 2
         timer.start();
 
     }
-
     @FXML
     void stopTime(ActionEvent event) {
-
-
-
+        //Not working - fix it with Release 2
     }
 
     public void SetLabel(String Text) {
         time_label.setText(Text);
-
+        //Not working - fix it with Release 2
 
     }
 
@@ -92,6 +85,8 @@ public class Controller_Timer implements Initializable {
             case "Black":
                 apane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                 break;
+
+                //Not working - fix it with Release 2
         }
 
     }
@@ -103,6 +98,8 @@ public class Controller_Timer implements Initializable {
         animation.setCycleCount(TimeSec);
         animation.play();
 
+        //Setting a new Timeline for the PROTO 0
+
     }
 
     public void CountDown(final Integer TimeinSec, int INTTimesOfRepat) {
@@ -112,6 +109,7 @@ public class Controller_Timer implements Initializable {
     }
     public void timelabel(double TL_Sec) {
 
+        // PROTOTYP 0 - IGNORE IT
          int tick = (int) TL_Sec;
          String S = "";
 
@@ -132,43 +130,36 @@ public class Controller_Timer implements Initializable {
     public void timer2( final Integer TimetoSec, final String CB_Color, final String CB_Sound)
     {
         SetBackground(CB_Color);
-
         Count = TimetoSec;
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-
-
-
-
         atimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 time_label.setText(String.valueOf(Count));
-                Count = Count - 1;
+                Count = Count - 1; //Test for PROTO 0
+                //To Do everytime a new Keyframe is reached
 
             }
         };
+        Duration duration = Duration.seconds(0.5); //Due to unknown Reasons the Duration Seconds has to be set at 0.5 - probably due to JAVAFX's not coherent time management - CRITICAL for PROTO 2
 
-
-        Duration duration = Duration.seconds(0.5);
-
+        //To Do everytime EventHanlder finishes with Action
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                time_label.setFont(new Font(50) );
+                time_label.setFont(new Font(50) ); //Setting Font for Timer Window
                 time_label.setText(String.valueOf(Count));
-                Count = Count - 1;
+                Count = Count - 1; //Counting down
 
             }
         };
-
         KeyFrame keyFrame = new KeyFrame(duration, onFinished);
         //add the keyframe to the timeline
         timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-        timer.start();
+        timeline.play(); //Starting the Timeline Object
+        timer.start();  //Making it start
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

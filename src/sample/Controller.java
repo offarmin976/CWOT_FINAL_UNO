@@ -23,6 +23,8 @@ import static javafx.application.Application.launch;
 
 public class Controller implements Initializable {
 
+        // CONTROLLER - CLOCKWORKS ORANGE TIMER PROTO FINAL UNO 1
+
         @FXML
         private Button button9;
         @FXML
@@ -49,38 +51,28 @@ public class Controller implements Initializable {
         private ComboBox<String> combo_color;
         private String comboselect_sound;
 
+        private ObservableList<String> dbTypeSound = FXCollections.observableArrayList("goat_sound", "elephant", "be_chillin"); // To extend...
 
-        private ObservableList<String> dbTypeSound = FXCollections.observableArrayList("goat_sound", "elephant", "be_chillin");
-
-        private ObservableList<String> dbTypeColor = FXCollections.observableArrayList("Black", "Red", "Blue", "Orange", "Yellow");
+        private ObservableList<String> dbTypeColor = FXCollections.observableArrayList("Black", "Red", "Blue", "Orange", "Yellow"); // To extend...
 
         // LOKAL
-
         private String Seconds, Minutes, Hours, Ultimo;
         private Integer i_Seconds, i_Minutes, i_Hours, i_Ultimo;
 
-
         Stage secondaryStage;
 
-
         void closeWindow(ActionEvent event) {
-
             //To be deleted
-
         }
 
         @FXML
         void minimizeWindow(ActionEvent event) {
-
         //To be deleted
-
         }
 
         @FXML
         void setName(ActionEvent event) {
-
         //To Do
-
         }
 
         @FXML
@@ -97,18 +89,13 @@ public class Controller implements Initializable {
 
         @FXML
         void resumeTime(ActionEvent event) {
-
             //To Do
-
         }
 
         @FXML
         void stopTime(ActionEvent event) {
-
             //To Do
         }
-
-
     @FXML
         void startTime(ActionEvent event) throws Exception{
 
@@ -120,14 +107,11 @@ public class Controller implements Initializable {
         i_Minutes = Integer.parseInt(Minutes);
         i_Hours = Integer.parseInt(Hours);
 
-
         comboselect_color = combo_color.getEditor().getText();
         comboselect_sound = combo_sound.getEditor().getText();
 
         i_Ultimo = (i_Hours * 3600) + (i_Hours * 60) + i_Seconds;
         Ultimo = String.valueOf(i_Ultimo);
-
-
 
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();

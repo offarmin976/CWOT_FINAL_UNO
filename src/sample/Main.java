@@ -15,19 +15,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        //CLOCKWORKS ORANGE - MAIN TIMER PROTOTYP FINAL UNO 1
         Parent root = FXMLLoader.load(getClass().getResource("EieruhrConfig.fxml"));
         primaryStage.setTitle("Die Eieruhr von Clockworks Orange");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
 
-    public class Clock extends Controller_Timer {
-
-
+    public class Clock extends Controller_Timer { // TEST - Ignore
     }
-
-
-
     public static void main(String[] args) {
         launch(args);
     }
