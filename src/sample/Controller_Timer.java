@@ -91,7 +91,7 @@ public class Controller_Timer implements Initializable {
     void resumeTime(ActionEvent event) {
         if (resume_possible == true) {
             timeline.play();
-            timer.start();
+            timer.start(); //KeyFrame restart
         }
     }
     @FXML
@@ -106,7 +106,7 @@ public class Controller_Timer implements Initializable {
 
     public void SetLabel(String Text) {
 
-        label_name.setText(Text);
+        //label_name.setText(Text);
 
     }
 
@@ -128,9 +128,7 @@ public class Controller_Timer implements Initializable {
 
             } catch (Exception e) {
 
-
             }
-
 
         }
 

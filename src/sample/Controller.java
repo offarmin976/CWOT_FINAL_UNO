@@ -92,7 +92,7 @@ public class Controller implements Initializable {
         {
             boolean again = false;
             if ((Testing1 == "") || (Testing2 == "") || (Testing3 == "") || (Testing4 == "")) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Hey - du hast was vergessen!", ButtonType.OK, ButtonType.CANCEL);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Someone or Something is missing - I dont want to be alone!", ButtonType.OK, ButtonType.CANCEL);
                 alert.showAndWait();
 
                 if (alert.getResult() == ButtonType.CANCEL) {
@@ -105,7 +105,7 @@ public class Controller implements Initializable {
 
                 if(((Integer.parseInt(Testing1) > 59) ||  (Integer.parseInt(Testing1) < 0)  || ((Integer.parseInt(Testing2) > 59) ||  (Integer.parseInt(Testing2) < 0))))
                 {
-                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Hmmm die Zahlen stimmen irgendwie nicht!", ButtonType.OK, ButtonType.CANCEL);
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Theres something off - you must check!", ButtonType.OK, ButtonType.CANCEL);
                     alert2.showAndWait();
 
                     if (alert2.getResult() == ButtonType.CANCEL) {

@@ -18,7 +18,7 @@ public class Main extends Application {
 
         //CLOCKWORKS ORANGE - MAIN TIMER PROTOTYP FINAL UNO 1
         Parent root = FXMLLoader.load(getClass().getResource("EieruhrConfig.fxml"));
-        primaryStage.setTitle("Die Eieruhr von Clockworks Orange");
+        primaryStage.setTitle("DIE EIERUHR");
         primaryStage.setScene(new Scene(root, 240, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
