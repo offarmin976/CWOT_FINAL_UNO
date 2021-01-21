@@ -17,15 +17,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         //CLOCKWORKS ORANGE - MAIN TIMER PROTOTYP FINAL UNO 1
-        Parent root = FXMLLoader.load(getClass().getResource("EieruhrConfig.fxml"));
-        primaryStage.setTitle("DIE EIERUHR");
-        primaryStage.setScene(new Scene(root, 240, 400));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("EieruhrConfig.fxml")); //Setting the Parent-Node-FXML Loader
+        primaryStage.setTitle("DIE EIERUHR"); //Setting Title
+        primaryStage.setScene(new Scene(root, 240, 400)); //Root Windows Size
+        primaryStage.setResizable(false); //Not allowing to resize
+        primaryStage.show(); //show and "open" the stage!
     }
 
-    public class Clock extends Controller_Timer { // TEST - Ignore
-    }
     public static void main(String[] args) {
         launch(args);
     }

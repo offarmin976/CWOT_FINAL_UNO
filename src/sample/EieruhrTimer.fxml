@@ -14,11 +14,6 @@
   <items>
     <AnchorPane maxHeight="400.0" maxWidth="240.0" minHeight="400.0" minWidth="240.0" prefHeight="400.0" prefWidth="240.0">
          <children>
-            <Text fx:id="text1" layoutX="8.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timer 1" textAlignment="CENTER" wrappingWidth="224.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
             <Button fx:id="button3" layoutX="32.0" layoutY="142.0" mnemonicParsing="false" onAction="#stopTime" prefHeight="41.0" prefWidth="64.0" style="-fx-background-color: red;" text="STOP" textAlignment="CENTER" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="144.0">
                <opaqueInsets>
                   <Insets />
@@ -50,6 +45,16 @@
                </image>
             </ImageView>
             <Text layoutX="61.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© CLOCKWORKS ORANGE" wrappingWidth="163.0" />
+            <Label fx:id="name_label" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="48.0" prefHeight="17.0" prefWidth="231.0" text="Label" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Text fx:id="label_name" layoutX="18.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
   </items>
 </SplitPane>

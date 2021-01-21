@@ -44,7 +44,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="combo_sound" layoutX="22.0" layoutY="218.0" prefHeight="27.0" prefWidth="191.0" />
+                  <ComboBox fx:id="combo_sound" layoutX="14.0" layoutY="218.0" prefHeight="27.0" prefWidth="212.0" />
                </children>
             </AnchorPane>
         </items>

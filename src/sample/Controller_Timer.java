@@ -15,7 +15,10 @@ import javafx.geometry.Insets;
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -45,68 +48,70 @@ import java.util.TimerTask;
 
 public class Controller_Timer implements Initializable {
 
-    // CONTROLLER TIMER- CLOCKWORKS ORANGE TIMER PROTO FINAL UNO 1
+    /*
+
+
+      ,-----.,--.    ,-----.  ,-----.,--. ,--.,--.   ,--. ,-----. ,------. ,--. ,--. ,---.       ,-----. ,------.   ,---.  ,--.  ,--. ,----.   ,------.
+     '  .--./|  |   '  .-.  ''  .--./|  .'   /|  |   |  |'  .-.  '|  .--. '|  .'   /'   .-'     '  .-.  '|  .--. ' /  O  \ |  ,'.|  |'  .-./   |  .---'
+     |  |    |  |   |  | |  ||  |    |  .   ' |  |.'.|  ||  | |  ||  '--'.'|  .   ' `.  `-.     |  | |  ||  '--'.'|  .-.  ||  |' '  ||  | .---.|  `--,
+     '  '--'\|  '--.'  '-'  ''  '--'\|  |\   \|   ,'.   |'  '-'  '|  |\  \ |  |\   \.-'    |    '  '-'  '|  |\  \ |  | |  ||  | `   |'  '--'  ||  `---.
+      `-----'`-----' `-----'  `-----'`--' '--''--'   '--' `-----' `--' '--'`--' '--'`-----'      `-----' `--' '--'`--' `--'`--'  `--' `------' `------'
+
+    EIN PROJEKT VON ARMIN BAJRICA, NORBERT HEINRICH & STEFAN FUCHS
+
+
+     */
 
     private String G_CBSoundSelect = "";
-    private Thread countdownThread;
-    public Stage primaryStage_neu;
     public Stage primaryStage_alt;
     Timer timer = new Timer();
     private Timeline timeline;
     int Count = 0;
-    private AnimationTimer atimer;
+    private AnimationTimer atimer; //Create AnimationTimer Object
     private static final Integer STARTTIME = 15;
     boolean resume_possible = true;
+    private double DurationsD = 0.5; //Create Duration for each keyframe
 
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
-    File F = new File("src/sample/" + G_CBSoundSelect + ".wav");
 
-    public void setPrimaryStage(Stage primaryStage_neu) {
-        this.primaryStage_alt = primaryStage_neu;
-
-    }
 
     @FXML
     private AnchorPane apane;
 
     @FXML
-    private Text text1;
+    private Text text1; //Textfield for Name on Timer Window
 
     @FXML
-    private Rectangle background_rectangle;
+    private Button button3; //Stop Button on Timer Window
 
     @FXML
-    private Button button3;
+    private Button button4; //Resume Button on Timer Window
 
     @FXML
-    private Button button4;
+    private Label time_label; //Label for Time in FXML on Timer Window
 
     @FXML
-    private Label time_label;
-
-    @FXML
-    private Label label_name;
+    private Label name_label; //Label for Name in FXML on Timer Window
 
     @FXML
     void resumeTime(ActionEvent event) {
         if (resume_possible == true) {
-            timeline.play();
+            timeline.play(); //Getting the Time & TimeLine Object to resume the CountDown
             timer.start(); //KeyFrame restart
         }
     }
     @FXML
     void stopTime(ActionEvent event) {
-        timeline.stop();
-        timer.stop();
-        play_audio(false);
+        timeline.stop(); //Getting the Time & TimeLine Object to stop the CountDown
+        timer.stop(); //Keyframe stopping
+        //play_audio(false);
 
 
 
     }
-
     public void SetLabel(String Text) {
 
-        //label_name.setText(Text);
+        name_label.setText(Text); //Set Label for Timer Window
 
     }
 
@@ -114,19 +119,22 @@ public class Controller_Timer implements Initializable {
     private void play_audio(boolean dowhat) {
 
 
-            File F = new File("src/sample/" + G_CBSoundSelect + ".wav");
+            File F = new File("src/sample/" + G_CBSoundSelect + ".wav"); //File Object to search in SRC / SAMPLE Folder for the .WAV Data
 
             try {
-                Clip c = AudioSystem.getClip();
+                Clip c = AudioSystem.getClip(); // Create a new Audio-Clip and open the selected File with the AudioInputStream
                 c.open(AudioSystem.getAudioInputStream(F));
-                if (dowhat == true) {
-                    c.loop(5);
+                if (dowhat == true) { //IF created for eventual Possibility to Break the playing when finished with Timer
+                    c.loop(5); //LOOP Function -> Will loop Audio-File 5 Times and then stop
                 }
-                if (dowhat == false) {
-                    c.stop();
+                if (dowhat == false) { //IF created for eventual Possibility to Break the playing when finished with Timer
+                    c.stop(); //Stop complete playing of the file
                 }
 
             } catch (Exception e) {
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Something went wrong trying to play the requested Sound - Im really sorry!!!", ButtonType.OK);
+                alert.showAndWait(); //Alert Object to inform User about a Error or Exception with only one Button: OK Button - show it and wait for Response
 
             }
 
@@ -134,38 +142,32 @@ public class Controller_Timer implements Initializable {
 
     public void timer2( final Integer TimetoSec, final String CB_Sound)
     {
+        //Final Integer - no correction possible anymore
         G_CBSoundSelect = CB_Sound;
         Count = TimetoSec;
-        timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setAutoReverse(true);
+        timeline = new Timeline(); //Create a new Timeline Object for Time-Sequences
+        timeline.setCycleCount(Timeline.INDEFINITE); //Repeat Timeline Object infinitely
+        timeline.setAutoReverse(true); //Defines whether this Animation reverses direction on alternating cycles.
 
-        atimer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                time_label.setText(String.valueOf(Count));
-                Count = Count - 1; //Test for PROTO 0
-                //To Do everytime a new Keyframe is reached
 
-            }
-        };
-        Duration duration = Duration.seconds(0.5); //Due to unknown Reasons the Duration Seconds has to be set at 0.5 - probably due to JAVAFX's not coherent time management - CRITICAL for PROTO 2
+        Duration duration = Duration.seconds(DurationsD); //Duration between each Keyframe
 
         //To Do everytime EventHanlder finishes with Action
         EventHandler onFinished = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 time_label.setFont(new Font(50) ); //Setting Font for Timer Window
-                time_label.setText(String.valueOf(Count));
+                time_label.setText(String.valueOf(Count)); //Set the Value of Countind Down
 
                 Count = Count - 1; //Counting down
 
                 if(Count < 0)
                 {
-                    play_audio(true);
-                    resume_possible = false;
-                    timeline.stop();
-                    timer.stop();
-                    timeline.pause();
+                    //When Countdown is finished exectue next steps;
+                    play_audio(true);//Acitvate Sound
+                    resume_possible = false;//Deactivate the Resume Button
+                    timeline.stop();//Stop the TimeLine
+                    timer.stop(); //Stop the Time
+                    timeline.pause();//Safety first ;)
 
                 }
 

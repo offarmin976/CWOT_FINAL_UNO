@@ -25,14 +25,26 @@ import static javafx.application.Application.launch;
 
 public class Controller implements Initializable {
 
-        // CONTROLLER - CLOCKWORKS ORANGE TIMER PROTO FINAL UNO 1
+        /*
+
+
+      ,-----.,--.    ,-----.  ,-----.,--. ,--.,--.   ,--. ,-----. ,------. ,--. ,--. ,---.       ,-----. ,------.   ,---.  ,--.  ,--. ,----.   ,------.
+     '  .--./|  |   '  .-.  ''  .--./|  .'   /|  |   |  |'  .-.  '|  .--. '|  .'   /'   .-'     '  .-.  '|  .--. ' /  O  \ |  ,'.|  |'  .-./   |  .---'
+     |  |    |  |   |  | |  ||  |    |  .   ' |  |.'.|  ||  | |  ||  '--'.'|  .   ' `.  `-.     |  | |  ||  '--'.'|  .-.  ||  |' '  ||  | .---.|  `--,
+     '  '--'\|  '--.'  '-'  ''  '--'\|  |\   \|   ,'.   |'  '-'  '|  |\  \ |  |\   \.-'    |    '  '-'  '|  |\  \ |  | |  ||  | `   |'  '--'  ||  `---.
+      `-----'`-----' `-----'  `-----'`--' '--''--'   '--' `-----' `--' '--'`--' '--'`-----'      `-----' `--' '--'`--' `--'`--'  `--' `------' `------'
+
+    EIN PROJEKT VON ARMIN BAJRICA, NORBERT HEINRICH & STEFAN FUCHS
+
+
+     */
 
         @FXML
-        private Button button9;
+        private Button button9; //Test Purposes
         @FXML
-        private Button button8;
+        private Button button8; //Test Purposes
         @FXML
-        private TextField field1;
+        private TextField field1; //Field Text for Hours, Minutes and Seconds
         @FXML
         private TextField field2;
         @FXML
@@ -44,25 +56,23 @@ public class Controller implements Initializable {
         @FXML
         private ChoiceBox<?> drop6;
         @FXML
-        private Button button7;
+        private Button button7; //Start the Timer BUtton
         @FXML
         private ComboBox<String> combo_sound;
         @FXML
-        private String comboselect_sound;
+        private String comboselect_sound; //ComboSelect - Combobox for Sound Section
 
-        private ObservableList<String> dbTypeSound = FXCollections.observableArrayList("cow_sms", "ducks", "nice_alarm_sound"); // To extend...
+        private ObservableList<String> dbTypeSound = FXCollections.observableArrayList("cow_sms", "ducks", "nice_alarm_sound"); // Possible Sound Selection based in dbTypeSound List of Strings
 
 
         // LOKAL
-        private String Seconds, Minutes, Hours, Ultimo, NameOfTimer;
+        private String Seconds, Minutes, Hours, Ultimo, NameOfTimer; //For calculation purposes
         private Integer i_Seconds, i_Minutes, i_Hours, i_Ultimo;
-
-        Stage secondaryStage;
 
 
         @FXML
         void setName(ActionEvent event) {
-        //To Do
+        //Set Name -> SetLabel Methode
         }
 
         @FXML
@@ -91,28 +101,28 @@ public class Controller implements Initializable {
         public boolean CheckValue(String Testing1, String Testing2, String Testing3, String Testing4)
         {
             boolean again = false;
-            if ((Testing1 == "") || (Testing2 == "") || (Testing3 == "") || (Testing4 == "")) {
+            if ((Testing1 == "") || (Testing2 == "") || (Testing3 == "") || (Testing4 == "")) { //CheckValue Methode for Testing and Checking Values
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Someone or Something is missing - I dont want to be alone!", ButtonType.OK, ButtonType.CANCEL);
-                alert.showAndWait();
+                alert.showAndWait(); //Alert Object to inform User about a Error or Exception with only one Button: OK Button - show it and wait for Response
 
                 if (alert.getResult() == ButtonType.CANCEL) {
-                    System.exit(0);
+                    System.exit(0); //Button Cancel - Exit Programm
                 }
                 if (alert.getResult() == ButtonType.OK) {
-
+                    //DO Nothing - let User check input
                 }
             }
 
                 if(((Integer.parseInt(Testing1) > 59) ||  (Integer.parseInt(Testing1) < 0)  || ((Integer.parseInt(Testing2) > 59) ||  (Integer.parseInt(Testing2) < 0))))
                 {
                     Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Theres something off - you must check!", ButtonType.OK, ButtonType.CANCEL);
-                    alert2.showAndWait();
+                    alert2.showAndWait(); //Alert Object to inform User about a Error or Exception with only one Button: OK Button - show it and wait for Response
 
                     if (alert2.getResult() == ButtonType.CANCEL) {
-                        System.exit(0);
+                        System.exit(0); //Button Cancel - Exit Programm
                     }
                     if (alert2.getResult() == ButtonType.OK) {
-
+                        //DO Nothing - let User check input
                     }
 
                 }
@@ -126,46 +136,44 @@ public class Controller implements Initializable {
         }
     @FXML
         void startTime(ActionEvent event) throws Exception{
-            if(CheckValue(field4.getText(),field3.getText(), field2.getText(), field1.getText()) == true) {
+            if(CheckValue(field4.getText(),field3.getText(), field2.getText(), field1.getText()) == true) { //If Checking is TRUE (Meaning == Everything is Alright
 
 
-                Seconds = field4.getText();
-                Minutes = field3.getText();
-                Hours = field2.getText();
+                Seconds = field4.getText(); //Get the Value
+                Minutes = field3.getText(); //Get the Value
+                Hours = field2.getText(); //Get the Value
 
-                NameOfTimer = field1.getText();
+                NameOfTimer = field1.getText(); //Get the Value
 
-                i_Seconds = Integer.parseInt(Seconds);
-                i_Minutes = Integer.parseInt(Minutes);
-                i_Hours = Integer.parseInt(Hours);
+                i_Seconds = Integer.parseInt(Seconds); //Converting
+                i_Minutes = Integer.parseInt(Minutes); //Converting
+                i_Hours = Integer.parseInt(Hours); //Converting
 
-                comboselect_sound = combo_sound.getValue();
+                comboselect_sound = combo_sound.getValue(); //Comboboxselection
 
-                i_Ultimo = (i_Hours * 3600) + (i_Hours * 60) + i_Seconds;
-                Ultimo = String.valueOf(i_Ultimo);
+                i_Ultimo = (i_Hours * 3600) + (i_Hours * 60) + i_Seconds; //Calculate full seconds to count down
+                Ultimo = String.valueOf(i_Ultimo); //Calculate the Ultimo Seconds Value
 
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                Scene scene = stage.getScene();
+                Node node = (Node) event.getSource(); //Create Node Object
+                Stage stage = (Stage) node.getScene().getWindow(); //Prepare Node
+                Scene scene = stage.getScene(); //Get the Scene
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EieruhrTimer.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                Controller_Timer CT = fxmlLoader.getController();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EieruhrTimer.fxml")); //Create new FXMLLoader and Load second FXML
+                Parent root = (Parent) fxmlLoader.load(); //Root Load of the new FCML
+                Controller_Timer CT = fxmlLoader.getController(); //Create "Controller"-Controller to get methodes of Controller_Timer
 
-
-                CT.SetLabel(NameOfTimer);
-
-                CT.timer2(i_Ultimo, comboselect_sound);
+                CT.SetLabel(field1.getText()); //SetLabel of Controller_Timer
+                CT.timer2(i_Ultimo, comboselect_sound); //Start the acutall Timer Methode with Parameters
 
 
-                scene.setRoot(root);
+                scene.setRoot(root); //Initializing
             }
 
     }
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
-            combo_sound.setItems(dbTypeSound);
+            combo_sound.setItems(dbTypeSound); //Needed in initialize methode - setting the combobox values
 
     }
 
